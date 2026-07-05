@@ -164,5 +164,5 @@ conn.close()
 st.markdown("---")
 
 #st.caption(
-#    "© 2026 Civic Intelligence System | AI Powered Decision Intelligence Platform"
+#    "2026 Civic Intelligence System | Decision Intelligence Platform"
 #)
