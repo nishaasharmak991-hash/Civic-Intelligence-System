@@ -163,7 +163,7 @@ st.pyplot(fig2)
 conn.close()
 st.markdown("---")
 
-<<<<<<< HEAD
+
 #st.caption(
 #    "2026 Civic Intelligence System | Decision Intelligence Platform"
 #)
