@@ -3,6 +3,20 @@ import pandas as pd
 import sqlite3
 import matplotlib.pyplot as plt
 import os
+import streamlit as st
+col1, col2 = st.columns([8,1])
+
+with col2:
+    if st.button("🚪 Logout"):
+        st.session_state.admin_logged_in = False
+        st.switch_page("app.py")
+if "admin_logged_in" not in st.session_state:
+    st.session_state.admin_logged_in = False
+
+if not st.session_state.admin_logged_in:
+    st.warning("🔒 Please login first.")
+    st.switch_page("Pages/Admin_Login.py")
+    st.stop()
 st.set_page_config(
     page_title="Civic Intelligence Admin",
     page_icon=" ",
@@ -29,14 +43,23 @@ st.title(" Civic Intelligence Admin Dashboard")
 
 st.markdown("---")
 
-DB_PATH = os.path.join(
-    os.path.dirname(__file__),
-    "..",
-    "data",
-    "community.db"
-)
+# DB_PATH = os.path.join(
+#     os.path.dirname(__file__),
+#     "..",
+#     "data",
+#     "community.db"
+# )
 
-DB_PATH = os.path.abspath(DB_PATH)
+# DB_PATH = os.path.abspath(DB_PATH)
+DB_PATH = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__),
+        "..",
+        "..",
+        "data",
+        "community.db"
+    )
+)
 
 conn = sqlite3.connect(DB_PATH)
 

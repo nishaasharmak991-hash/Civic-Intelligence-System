@@ -236,12 +236,12 @@ def create_pdf(
         )
     )
 
-    story.append(
-        Paragraph(
-            "Powered by Google Gemini AI",
-            normal
-        )
-    )
+    # story.append(
+    #     Paragraph(
+    #         "Powered by Google Gemini AI",
+    #         normal
+    #     )
+    # )
 
     # -----------------------------
     # Build PDF
