@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import os
 st.set_page_config(
     page_title="Civic Intelligence Admin",
-    page_icon="🛠️",
+    page_icon=" ",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -25,7 +25,7 @@ st.markdown(
     hide_streamlit_style,
     unsafe_allow_html=True
 )
-st.title("🛠 Civic Intelligence Admin Dashboard")
+st.title(" Civic Intelligence Admin Dashboard")
 
 st.markdown("---")
 
@@ -163,6 +163,6 @@ st.pyplot(fig2)
 conn.close()
 st.markdown("---")
 
-st.caption(
-    "© 2026 Civic Intelligence System | AI Powered Decision Intelligence Platform"
-)
+#st.caption(
+#    "© 2026 Civic Intelligence System | AI Powered Decision Intelligence Platform"
+#)
