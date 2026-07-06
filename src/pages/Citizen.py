@@ -32,7 +32,9 @@ database.create_database()
 load_dotenv()
 
 client = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY")
+    vertexai=True,
+    project="civic-intelligence-system",
+    location="us-central1",
 )
 
 

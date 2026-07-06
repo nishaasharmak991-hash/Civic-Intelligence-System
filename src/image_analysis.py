@@ -1,6 +1,6 @@
 import tempfile
 import json
-
+from google.genai import types
 
 def analyze_image(client, uploaded_image, language):
 
@@ -17,8 +17,12 @@ def analyze_image(client, uploaded_image, language):
         image_path = temp_file.name
 
     # Upload image
-    uploaded_file = client.files.upload(
-        file=image_path
+    with open(image_path, "rb") as f:
+        image_bytes = f.read()
+
+    image_part = types.Part.from_bytes(
+         data=image_bytes,
+        mime_type=uploaded_image.type
     )
 
     prompt = f"""
@@ -68,14 +72,11 @@ Write every value in {language}.
 """
 
     response = client.models.generate_content(
-
         model="gemini-2.5-flash",
-
         contents=[
-            prompt,
-            uploaded_file
+             prompt,
+            image_part
         ]
-
     )
 
     text = response.text.strip()

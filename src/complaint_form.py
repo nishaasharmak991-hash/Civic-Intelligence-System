@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_mic_recorder import mic_recorder
+from audio_recorder_streamlit import audio_recorder
 from speech_to_text import transcribe_audio
 
 
@@ -57,49 +57,34 @@ def show_complaint_form(client):
 
     with tab2:
 
-        st.write(
-        "Click the microphone and speak your complaint."
+        st.write("Click below to record your complaint.")
+
+        audio_bytes = audio_recorder(
+            text="🎤 Click to Record",
+            recording_color="#e74c3c",
+            neutral_color="#2ecc71",
+            icon_name="microphone",
+            icon_size="2x",
         )
 
-        audio = mic_recorder(
+        if audio_bytes:
 
-        start_prompt="🎙 Start Recording",
+            with st.spinner("Converting speech to text..."):
 
-        stop_prompt="⏹ Stop Recording",
-
-        just_once=True,
-
-        use_container_width=True
-
-        )
-
-        if audio:
-
-         with st.spinner(
-            "Converting speech to text..."
-            ):
-
-            complaint = transcribe_audio(
-                client,
-                audio["bytes"]
-            )
+                complaint = transcribe_audio(
+                    client,
+                    audio_bytes
+                )
 
             st.session_state.problem = complaint
 
-            st.success(
-            "Speech converted successfully."
-            )
+            st.success("Speech converted successfully.")
 
             st.text_area(
-
                 "Recognized Complaint",
-
-                 complaint,
-
+                complaint,
                 height=180,
-
                 disabled=True
-
             )
     
     # ==========================================

@@ -1,5 +1,5 @@
 import tempfile
-
+from google.genai import types
 
 def transcribe_audio(client, audio_bytes):
 
@@ -20,8 +20,12 @@ def transcribe_audio(client, audio_bytes):
     # Upload Audio
     # ----------------------------------------
 
-    uploaded_file = client.files.upload(
-        file=audio_path
+    with open(audio_path, "rb") as f:
+        audio_bytes = f.read()
+
+    audio_part = types.Part.from_bytes(
+        data=audio_bytes,
+        mime_type="audio/wav"
     )
 
     # ----------------------------------------
@@ -52,14 +56,11 @@ Rules:
     # ----------------------------------------
 
     response = client.models.generate_content(
-
         model="gemini-2.5-flash",
-
         contents=[
             prompt,
-            uploaded_file
+            audio_part
         ]
-
     )
 
     return response.text.strip()
